@@ -35,6 +35,7 @@ public class AccountController {
 		Account account = new Account();
 		account.setBalance(body.balance);
 		body.balance = account.getBalance().add(body.value);
+		account.setBalance(body.balance);
 		accountRepository.save(account);
 		Statement statement = new Statement();
 		statement.setName(body.name);
@@ -49,6 +50,7 @@ public class AccountController {
 		if(! account.getBalance().equals(null)) {
 		account.setBalance(body.balance);
 		body.balance = account.getBalance().subtract(body.value);
+		account.setBalance(body.balance);
 		accountRepository.save(account);
 		Statement statement = new Statement();
 		statement.setName(body.name);
