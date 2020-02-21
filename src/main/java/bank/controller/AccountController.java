@@ -23,6 +23,8 @@ public class AccountController {
 	private AccountRepository accountRepository;
 	private StatementRepository statementRepository;
 	
+	Account account = new Account();
+	
 	@Autowired
 	public AccountController(UserRepository userRepository, AccountRepository accountRepository, StatementRepository statementRepository) {
 		this.userRepository = userRepository;
@@ -32,7 +34,6 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account/add_money", method = RequestMethod.POST)
 	public ResponseEntity<Account> addMoney(@RequestBody AccountRequest body){
-		Account account = new Account();
 		account.setBalance(body.balance);
 		body.balance = account.getBalance().add(body.value);
 		account.setBalance(body.balance);
@@ -46,7 +47,6 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account/subtract_money", method = RequestMethod.POST)
 	public ResponseEntity<Account> subtractMoney(@RequestBody AccountRequest body){
-		Account account = new Account();
 		if(! account.getBalance().equals(null)) {
 		account.setBalance(body.balance);
 		body.balance = account.getBalance().subtract(body.value);
